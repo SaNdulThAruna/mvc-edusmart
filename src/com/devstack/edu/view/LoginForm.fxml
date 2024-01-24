@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="528.0" prefWidth="858.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.edu.controller.LoginFormController">
+   <children>
+      <ImageView fitHeight="530.0" fitWidth="367.0" pickOnBounds="true">
+         <image>
+            <Image url="@../asserts/secuirty/loginbg.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="393.0" layoutY="72.0" text="Login">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <TextField layoutX="393.0" layoutY="134.0" prefHeight="38.0" prefWidth="435.0" promptText="root email" style="-fx-background-color: #FFFFFF; -fx-border-color: #D9D9D9;" />
+      <PasswordField layoutX="393.0" layoutY="207.0" prefHeight="38.0" prefWidth="435.0" promptText="password" style="-fx-background-color: #FFFFFF; -fx-border-color: #D9D9D9;" />
+      <Button layoutX="393.0" layoutY="291.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="435.0" style="-fx-background-color: #0D99FF;" text="Sign in" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="593.0" layoutY="373.0" text="OR" />
+      <Button layoutX="393.0" layoutY="407.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="435.0" style="-fx-background-color: #34495E;" text="Button" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>
