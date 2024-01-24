@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="registerFormContext" prefHeight="530.0" prefWidth="932.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.edu.controller.SignupFormController">
+    <children>
+        <ImageView fitHeight="530.0" fitWidth="367.0" pickOnBounds="true">
+            <image>
+                <Image url="@../asserts/secuirty/loginbg.jpg" />
+            </image>
+        </ImageView>
+        <Label layoutX="393.0" layoutY="47.0" text="Register">
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Label>
+        <TextField layoutX="393.0" layoutY="179.0" prefHeight="38.0" prefWidth="512.0" promptText="root email" style="-fx-background-color: #FFFFFF; -fx-border-color: #D9D9D9;" />
+        <PasswordField layoutX="393.0" layoutY="239.0" prefHeight="38.0" prefWidth="512.0" promptText="password" style="-fx-background-color: #FFFFFF; -fx-border-color: #D9D9D9;" />
+        <Button layoutX="393.0" layoutY="315.0" mnemonicParsing="false" onAction="#signUpOnAction" prefHeight="52.0" prefWidth="512.0" style="-fx-background-color: #0D99FF;" text="Sign up" textFill="WHITE">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Label layoutX="639.0" layoutY="386.0" text="OR" />
+        <Button layoutX="393.0" layoutY="422.0" mnemonicParsing="false" onAction="#alreadyHaveAccountOnAction" prefHeight="52.0" prefWidth="512.0" style="-fx-background-color: #34495E;" text="Already have an accout" textFill="WHITE">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+      <TextField layoutX="393.0" layoutY="119.0" prefHeight="38.0" prefWidth="248.0" promptText="First Name" style="-fx-background-color: #FFFFFF; -fx-border-color: #D9D9D9;" />
+      <TextField layoutX="657.0" layoutY="119.0" prefHeight="38.0" prefWidth="248.0" promptText="Last Name" style="-fx-background-color: #FFFFFF; -fx-border-color: #D9D9D9;" />
+    </children>
+</AnchorPane>
