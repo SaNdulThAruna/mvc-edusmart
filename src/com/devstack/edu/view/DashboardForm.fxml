@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="666.0" prefWidth="1189.0" style="-fx-background-color: #FFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.edu.controller.DashboardFormController">
+   <children>
+      <Label layoutX="25.0" layoutY="23.0" text="Dashboard">
+         <font>
+            <Font name="Calibri Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="744.0" layoutY="30.0" prefHeight="21.0" prefWidth="78.0" text="10 : 22 : 12">
+         <font>
+            <Font name="Segoe UI Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="858.0" layoutY="31.0" text="2023.01.22">
+         <font>
+            <Font name="Segoe UI Bold" size="15.0" />
+         </font>
+      </Label>
+      <Separator layoutX="836.0" layoutY="30.0" orientation="VERTICAL" prefHeight="21.0" prefWidth="0.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Separator>
+      <Button layoutX="967.0" layoutY="20.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="193.0" style="-fx-background-color: #2980B9;" text="Make a backup" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <AnchorPane layoutX="25.0" layoutY="123.0" prefHeight="183.0" prefWidth="193.0" style="-fx-background-color: #1ABC9C; -fx-border-style: 30;;">
+         <effect>
+            <DropShadow color="#a19696" height="39.66" radius="22.439999999999998" spread="0.33" width="52.1" />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <children>
+            <Label layoutX="63.0" layoutY="159.0" text="Student" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../asserts/secuirty/student.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="256.0" layoutY="123.0" prefHeight="183.0" prefWidth="193.0" style="-fx-background-color: #D35400; -fx-border-style: 30;">
+         <effect>
+            <DropShadow color="#a19696" height="39.66" radius="22.439999999999998" spread="0.33" width="52.1" />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <children>
+            <Label layoutX="56.0" layoutY="159.0" text="Programs" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+             <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true">
+                 <image>
+                     <Image url="@../asserts/secuirty/program.png" />
+                 </image>
+             </ImageView>
+         </children>
+      </AnchorPane>
+       <AnchorPane layoutX="616.0" layoutY="384.0" prefHeight="183.0" prefWidth="193.0" style="-fx-background-color: #2980B9; -fx-border-style: 30;">
+           <effect>
+               <DropShadow color="#a19696" height="39.66" radius="22.439999999999998" spread="0.33" width="52.1" />
+           </effect>
+           <cursor>
+               <Cursor fx:constant="HAND" />
+           </cursor>
+         <children>
+            <Label layoutX="64.0" layoutY="159.0" text="Reports" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+             <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true">
+                 <image>
+                     <Image url="@../asserts/secuirty/reports.png" />
+                 </image>
+             </ImageView>
+         </children>
+       </AnchorPane>
+       <AnchorPane layoutX="384.0" layoutY="384.0" prefHeight="183.0" prefWidth="193.0" style="-fx-background-color: #487EB0; -fx-border-style: 30;">
+           <effect>
+               <DropShadow color="#a19696" height="39.66" radius="22.439999999999998" spread="0.33" width="52.1" />
+           </effect>
+           <cursor>
+               <Cursor fx:constant="HAND" />
+           </cursor>
+         <children>
+            <Label layoutX="41.0" layoutY="159.0" text="Registrations" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+             <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true">
+                 <image>
+                     <Image url="@../asserts/secuirty/registration.png" />
+                 </image>
+             </ImageView>
+         </children>
+       </AnchorPane>
+       <AnchorPane layoutX="967.0" layoutY="123.0" prefHeight="183.0" prefWidth="193.0" style="-fx-background-color: #C0392B; -fx-border-style: 30;">
+           <effect>
+               <DropShadow color="#a19696" height="39.66" radius="22.439999999999998" spread="0.33" width="52.1" />
+           </effect>
+           <cursor>
+               <Cursor fx:constant="HAND" />
+           </cursor>
+         <children>
+            <Label layoutX="65.0" layoutY="159.0" text="Income" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+             <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true">
+                 <image>
+                     <Image url="@../asserts/secuirty/income.png" />
+                 </image>
+             </ImageView>
+         </children>
+       </AnchorPane>
+       <AnchorPane layoutX="730.0" layoutY="123.0" prefHeight="183.0" prefWidth="193.0" style="-fx-background-color: #8E44AD; -fx-border-style: 30;">
+           <effect>
+               <DropShadow color="#a19696" height="39.66" radius="22.439999999999998" spread="0.33" width="52.1" />
+           </effect>
+           <cursor>
+               <Cursor fx:constant="HAND" />
+           </cursor>
+         <children>
+            <Label layoutX="66.0" layoutY="159.0" text="Intakes" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+             <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true">
+                 <image>
+                     <Image url="@../asserts/secuirty/intake.png" />
+                 </image>
+             </ImageView>
+         </children>
+       </AnchorPane>
+      <AnchorPane layoutX="490.0" layoutY="123.0" prefHeight="183.0" prefWidth="193.0" style="-fx-background-color: #2C3E50; -fx-border-style: 30;">
+         <effect>
+            <DropShadow color="#a19696" height="39.66" radius="22.439999999999998" spread="0.33" width="52.1" />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <children>
+            <Label layoutX="62.0" layoutY="159.0" text="Trainers" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+             <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true">
+                 <image>
+                     <Image url="@../asserts/secuirty/teacher.png" />
+                 </image>
+             </ImageView>
+         </children>
+      </AnchorPane>
+      <Label layoutX="25.0" layoutY="631.0" text="Version : 1.0.0" />
+      <Label layoutX="893.0" layoutY="631.0" text="Developed By : Athena Extreme Solution" />
+
+   </children>
+</AnchorPane>
