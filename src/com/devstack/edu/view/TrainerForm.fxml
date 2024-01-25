@@ -1,14 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.devstack.edu.controller.TrainerFormController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="incomeFormContext" prefHeight="717.0" prefWidth="1286.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.edu.controller.IncomeFormController">
+    <children>
+        <Label layoutX="14.0" layoutY="14.0" text="Income Statistics">
+            <font>
+                <Font name="System Bold" size="23.0" />
+            </font>
+        </Label>
+        <Label layoutX="18.0" layoutY="683.0" text="Version : 1.0.0" />
+        <Label layoutX="1005.0" layoutY="683.0" text="Developed By : Athena Extreme Solution" />
+        <Button layoutX="1092.0" layoutY="14.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="180.0" style="-fx-background-color: #16A085;" text="+ New Intake" textFill="WHITE">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
+        <Button layoutX="882.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToHomeOnAction" prefHeight="46.0" prefWidth="188.0" style="-fx-background-color: #353B48;" text="Back to Home" textFill="WHITE">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
+      <RadioButton layoutX="18.0" layoutY="85.0" mnemonicParsing="false" selected="true" text="Last Month">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </RadioButton>
+      <RadioButton layoutX="177.0" layoutY="85.0" mnemonicParsing="false" text="Today">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </RadioButton>
+      <RadioButton layoutX="307.0" layoutY="85.0" mnemonicParsing="false" text="All">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </RadioButton>
+      <AreaChart layoutX="14.0" layoutY="145.0" prefHeight="521.0" prefWidth="1258.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </AreaChart>
+    </children>
 </AnchorPane>
