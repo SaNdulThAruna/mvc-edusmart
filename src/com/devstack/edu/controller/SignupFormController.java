@@ -11,7 +11,8 @@ import java.io.IOException;
 public class SignupFormController {
     public AnchorPane registerFormContext;
 
-    public void signUpOnAction(ActionEvent actionEvent) {
+    public void signUpOnAction(ActionEvent actionEvent) throws IOException {
+        setUI("DashboardForm");
     }
 
     public void alreadyHaveAccountOnAction(ActionEvent actionEvent) throws IOException {

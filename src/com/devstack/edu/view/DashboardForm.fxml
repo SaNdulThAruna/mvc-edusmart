@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="666.0" prefWidth="1189.0" style="-fx-background-color: #FFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.edu.controller.DashboardFormController">
+<AnchorPane fx:id="dashboardFormContext" prefHeight="666.0" prefWidth="1189.0" style="-fx-background-color: #FFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.edu.controller.DashboardFormController">
    <children>
       <Label layoutX="25.0" layoutY="23.0" text="Dashboard">
          <font>
@@ -50,7 +50,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true">
+            <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#studentOnClickAction" pickOnBounds="true">
                <image>
                   <Image url="@../asserts/secuirty/student.png" />
                </image>
@@ -70,7 +70,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-             <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true">
+             <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#programOnClickAction" pickOnBounds="true">
                  <image>
                      <Image url="@../asserts/secuirty/program.png" />
                  </image>
@@ -90,7 +90,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-             <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true">
+             <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#reportOnClickAction" pickOnBounds="true">
                  <image>
                      <Image url="@../asserts/secuirty/reports.png" />
                  </image>
@@ -110,7 +110,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-             <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true">
+             <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#registrationOnClickAction" pickOnBounds="true">
                  <image>
                      <Image url="@../asserts/secuirty/registration.png" />
                  </image>
@@ -130,7 +130,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-             <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true">
+             <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#incomeOnClickAction" pickOnBounds="true">
                  <image>
                      <Image url="@../asserts/secuirty/income.png" />
                  </image>
@@ -150,7 +150,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-             <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true">
+             <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#intakeOnClickAction" pickOnBounds="true">
                  <image>
                      <Image url="@../asserts/secuirty/intake.png" />
                  </image>
@@ -170,7 +170,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-             <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true">
+             <ImageView fitHeight="129.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#trainerOnClickAction" pickOnBounds="true">
                  <image>
                      <Image url="@../asserts/secuirty/teacher.png" />
                  </image>

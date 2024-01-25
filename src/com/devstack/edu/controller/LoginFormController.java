@@ -13,7 +13,8 @@ import java.net.URL;
 public class LoginFormController {
     public AnchorPane loginFormContext;
 
-    public void signInOnAction(ActionEvent actionEvent) {
+    public void signInOnAction(ActionEvent actionEvent) throws IOException {
+        setUI("DashboardForm");
     }
 
     public void createAccountOnAction(ActionEvent actionEvent) throws IOException {
