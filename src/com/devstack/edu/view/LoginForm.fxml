@@ -22,8 +22,8 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField layoutX="393.0" layoutY="134.0" prefHeight="38.0" prefWidth="435.0" promptText="root email" style="-fx-background-color: #FFFFFF; -fx-border-color: #D9D9D9;" />
-      <PasswordField layoutX="393.0" layoutY="207.0" prefHeight="38.0" prefWidth="435.0" promptText="password" style="-fx-background-color: #FFFFFF; -fx-border-color: #D9D9D9;" />
+      <TextField fx:id="txtEmail" layoutX="393.0" layoutY="134.0" prefHeight="38.0" prefWidth="435.0" promptText="root email" style="-fx-background-color: #FFFFFF; -fx-border-color: #D9D9D9;" />
+      <PasswordField fx:id="txtPassword" layoutX="393.0" layoutY="207.0" prefHeight="38.0" prefWidth="435.0" promptText="password" style="-fx-background-color: #FFFFFF; -fx-border-color: #D9D9D9;" />
       <Button layoutX="393.0" layoutY="291.0" mnemonicParsing="false" onAction="#signInOnAction" prefHeight="52.0" prefWidth="435.0" style="-fx-background-color: #0D99FF;" text="Sign in" textFill="WHITE">
          <font>
             <Font size="18.0" />
