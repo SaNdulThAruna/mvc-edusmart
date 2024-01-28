@@ -19,6 +19,11 @@ public class LoginFormController {
     public TextField txtEmail;
     public PasswordField txtPassword;
 
+    public void initialize(){
+        txtEmail.setText("sandul@gmail.com");
+        txtPassword.setText("1234");
+    }
+
     public void signInOnAction(ActionEvent actionEvent) throws IOException {
 
         try {

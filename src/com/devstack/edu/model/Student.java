@@ -1,19 +1,20 @@
 package com.devstack.edu.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Student {
     private int studentId;
     private String studentName;
     private String email;
-    private Date date;
+    private LocalDate date;
     private String address;
     private boolean status;
 
     public Student() {
     }
 
-    public Student(int studentId, String studentName, String email, Date date, String address, boolean status) {
+    public Student(int studentId, String studentName, String email, LocalDate date, String address, boolean status) {
         this.studentId = studentId;
         this.studentName = studentName;
         this.email = email;
@@ -46,11 +47,11 @@ public class Student {
         this.email = email;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
