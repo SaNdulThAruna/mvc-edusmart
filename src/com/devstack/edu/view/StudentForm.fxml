@@ -19,12 +19,12 @@
       </Label>
       <Label layoutX="18.0" layoutY="730.0" text="Version : 1.0.0" />
       <Label layoutX="1009.0" layoutY="730.0" text="Developed By : Athena Extreme Solution" />
-      <TextField layoutX="14.0" layoutY="128.0" prefHeight="40.0" prefWidth="332.0" promptText="Student Name" style="-fx-border-color: #D9D9D9;">
+      <TextField fx:id="txtStudentName" layoutX="14.0" layoutY="128.0" prefHeight="40.0" prefWidth="332.0" promptText="Student Name" style="-fx-border-color: #D9D9D9;">
          <font>
             <Font size="17.0" />
          </font>
       </TextField>
-      <TextField layoutX="925.0" layoutY="128.0" prefHeight="40.0" prefWidth="349.0" promptText="Address" style="-fx-border-color: #D9D9D9;">
+      <TextField fx:id="txtAddress" layoutX="925.0" layoutY="128.0" prefHeight="40.0" prefWidth="349.0" promptText="Address" style="-fx-border-color: #D9D9D9;">
          <font>
             <Font size="17.0" />
          </font>
@@ -34,12 +34,12 @@
             <Font size="17.0" />
          </font>
       </TextField>
-      <TextField layoutX="356.0" layoutY="128.0" prefHeight="40.0" prefWidth="332.0" promptText="Email" style="-fx-border-color: #D9D9D9;">
+      <TextField fx:id="txtEmail" layoutX="356.0" layoutY="128.0" prefHeight="40.0" prefWidth="332.0" promptText="Email" style="-fx-border-color: #D9D9D9;">
          <font>
             <Font size="17.0" />
          </font>
       </TextField>
-      <DatePicker layoutX="699.0" layoutY="128.0" prefHeight="40.0" prefWidth="220.0" promptText="Date of Birth" style="-fx-border-color: #D9D9D9;" />
+      <DatePicker fx:id="dob" layoutX="699.0" layoutY="128.0" prefHeight="40.0" prefWidth="220.0" promptText="Date of Birth" style="-fx-border-color: #D9D9D9;" />
       <TableView layoutX="18.0" layoutY="345.0" prefHeight="375.0" prefWidth="1258.0" style="-fx-background-color: #FFFF;">
         <columns>
           <TableColumn prefWidth="133.0" text="Student ID" />
@@ -61,7 +61,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="1084.0" layoutY="207.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="188.0" style="-fx-background-color: #2980B9;" text="Save Student" textFill="WHITE">
+      <Button fx:id="btnSaveUpdate" layoutX="1084.0" layoutY="207.0" mnemonicParsing="false" onAction="#btnSaveUpdateOnAction" prefHeight="40.0" prefWidth="188.0" style="-fx-background-color: #2980B9;" text="Save Student" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>

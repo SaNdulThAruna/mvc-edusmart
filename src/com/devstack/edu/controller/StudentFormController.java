@@ -3,6 +3,9 @@ package com.devstack.edu.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -10,6 +13,11 @@ import java.io.IOException;
 
 public class StudentFormController {
     public AnchorPane studentFormContext;
+    public TextField txtStudentName;
+    public TextField txtAddress;
+    public TextField txtEmail;
+    public DatePicker dob;
+    public Button btnSaveUpdate;
 
     public void backToHomeOnAction(ActionEvent actionEvent) throws IOException {
         setUI("DashboardForm");
@@ -20,5 +28,9 @@ public class StudentFormController {
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/"+location+".fxml"))));
         stage.setTitle("EduSmart");
         stage.centerOnScreen();
+    }
+
+    public void btnSaveUpdateOnAction(ActionEvent actionEvent) {
+        
     }
 }
