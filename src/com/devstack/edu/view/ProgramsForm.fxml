@@ -20,12 +20,7 @@
         </Label>
         <Label layoutX="14.0" layoutY="892.0" text="Version : 1.0.0" />
         <Label layoutX="1005.0" layoutY="892.0" text="Developed By : Athena Extreme Solution" />
-        <TextField layoutX="14.0" layoutY="128.0" prefHeight="40.0" prefWidth="283.0" promptText="Program name" style="-fx-border-color: #D9D9D9;">
-            <font>
-                <Font size="17.0" />
-            </font>
-        </TextField>
-        <TextField layoutX="636.0" layoutY="128.0" prefHeight="40.0" prefWidth="636.0" promptText="Address" style="-fx-border-color: #D9D9D9;">
+        <TextField fx:id="txtContent" layoutX="636.0" layoutY="128.0" prefHeight="40.0" prefWidth="636.0" promptText="program Content" style="-fx-border-color: #D9D9D9;">
             <font>
                 <Font size="17.0" />
             </font>
@@ -35,43 +30,38 @@
                 <Font size="17.0" />
             </font>
         </TextField>
-        <TextField layoutX="304.0" layoutY="128.0" prefHeight="40.0" prefWidth="267.0" promptText="Hours" style="-fx-border-color: #D9D9D9;">
+        <TextField fx:id="txtHours" layoutX="304.0" layoutY="128.0" prefHeight="40.0" prefWidth="267.0" promptText="Hours" style="-fx-border-color: #D9D9D9;">
             <font>
                 <Font size="17.0" />
             </font>
         </TextField>
-        <TableView layoutX="18.0" layoutY="507.0" prefHeight="375.0" prefWidth="1258.0" style="-fx-background-color: #FFFF;">
+        <TableView fx:id="tblProgram" layoutX="18.0" layoutY="507.0" prefHeight="375.0" prefWidth="1258.0" style="-fx-background-color: #FFFF;">
             <columns>
-                <TableColumn prefWidth="151.0" text="Trainer ID" />
-                <TableColumn minWidth="0.0" prefWidth="281.0" text="Program" />
-                <TableColumn minWidth="0.0" prefWidth="205.0" text="Hours" />
-                <TableColumn minWidth="0.0" prefWidth="264.0" text="Amount" />
-                <TableColumn prefWidth="356.0" text="Operation" />
+                <TableColumn fx:id="colTrainer" prefWidth="151.0" text="Trainer ID" />
+                <TableColumn fx:id="colProgram" minWidth="0.0" prefWidth="281.0" text="Program" />
+                <TableColumn fx:id="colHours" minWidth="0.0" prefWidth="205.0" text="Hours" />
+                <TableColumn fx:id="colAmount" minWidth="0.0" prefWidth="264.0" text="Amount" />
+                <TableColumn fx:id="colOperation" prefWidth="356.0" text="Operation" />
             </columns>
         </TableView>
-        <Button layoutX="1092.0" layoutY="14.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="180.0" style="-fx-background-color: #16A085;" text="+ New Program" textFill="WHITE">
+        <Button layoutX="1084.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToHomeOnAction" prefHeight="48.0" prefWidth="188.0" style="-fx-background-color: #353B48;" text="Back to Home" textFill="WHITE">
             <font>
                 <Font size="18.0" />
             </font>
         </Button>
-        <Button layoutX="882.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToHomeOnAction" prefHeight="48.0" prefWidth="188.0" style="-fx-background-color: #353B48;" text="Back to Home" textFill="WHITE">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Button>
-        <Button layoutX="12.0" layoutY="360.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="223.0" style="-fx-background-color: #2980B9;" text="Save Program" textFill="WHITE">
+        <Button layoutX="12.0" layoutY="360.0" mnemonicParsing="false" onAction="#btnSaveProgramOnAction" prefHeight="48.0" prefWidth="223.0" style="-fx-background-color: #2980B9;" text="Save Program" textFill="WHITE">
             <font>
                 <Font size="18.0" />
             </font>
         </Button>
         <Separator layoutX="14.0" layoutY="427.0" prefHeight="0.0" prefWidth="1258.0" />
-        <TextField layoutX="304.0" layoutY="192.0" prefHeight="40.0" prefWidth="267.0" promptText="Program Amount" style="-fx-border-color: #D9D9D9;">
+        <TextField fx:id="txtAmount" layoutX="14.0" layoutY="197.0" prefHeight="40.0" prefWidth="283.0" promptText="Program Amount" style="-fx-border-color: #D9D9D9;">
             <font>
                 <Font size="17.0" />
             </font>
         </TextField>
-      <ComboBox layoutX="14.0" layoutY="192.0" prefHeight="40.0" prefWidth="283.0" promptText="Trainer" />
+      <ComboBox fx:id="cmbTrainer" layoutX="14.0" layoutY="128.0" prefHeight="40.0" prefWidth="283.0" promptText="Trainer" />
       <Separator layoutX="596.0" layoutY="113.0" orientation="VERTICAL" prefHeight="317.0" prefWidth="14.0" />
-      <TextArea layoutX="636.0" layoutY="186.0" prefHeight="222.0" prefWidth="636.0" />
+      <TextArea fx:id="lstContent" layoutX="636.0" layoutY="186.0" prefHeight="222.0" prefWidth="636.0" />
     </children>
 </AnchorPane>
