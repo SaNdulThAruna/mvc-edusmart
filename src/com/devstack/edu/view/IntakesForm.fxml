@@ -20,7 +20,7 @@
         </Label>
         <Label layoutX="18.0" layoutY="730.0" text="Version : 1.0.0" />
         <Label layoutX="1009.0" layoutY="730.0" text="Developed By : Athena Extreme Solution" />
-        <TextField layoutX="14.0" layoutY="128.0" prefHeight="40.0" prefWidth="332.0" promptText="Trainer Name" style="-fx-border-color: #D9D9D9;">
+        <TextField layoutX="14.0" layoutY="128.0" prefHeight="40.0" prefWidth="332.0" promptText="Intake Name" style="-fx-border-color: #D9D9D9;">
             <font>
                 <Font size="17.0" />
             </font>

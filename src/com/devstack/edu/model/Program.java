@@ -9,12 +9,12 @@ public class Program {
     private double amount;
     private String userEmail;
     private long trainerId;
-    private List<ProgramContent> content;
+    private List<String> content;
 
     public Program() {
     }
 
-    public Program(long programId, int hours, String programName, double amount, String userEmail, long trainerId, List<ProgramContent> content) {
+    public Program(long programId, int hours, String programName, double amount, String userEmail, long trainerId, List<String> content) {
         this.programId = programId;
         this.hours = hours;
         this.programName = programName;
@@ -72,11 +72,11 @@ public class Program {
         this.trainerId = trainerId;
     }
 
-    public List<ProgramContent> getContent() {
+    public List<String> getContent() {
         return content;
     }
 
-    public void setContent(List<ProgramContent> content) {
+    public void setContent(List<String> content) {
         this.content = content;
     }
 
