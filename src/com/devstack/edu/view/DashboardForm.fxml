@@ -18,12 +18,12 @@
             <Font name="Calibri Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="744.0" layoutY="30.0" prefHeight="21.0" prefWidth="78.0" text="10 : 22 : 12">
+      <Label fx:id="lblTime" alignment="CENTER_RIGHT" layoutX="730.0" layoutY="30.0" prefHeight="21.0" prefWidth="92.0">
          <font>
             <Font name="Segoe UI Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="858.0" layoutY="31.0" text="2023.01.22">
+      <Label fx:id="lblDate" layoutX="858.0" layoutY="31.0" prefHeight="19.0" prefWidth="92.0">
          <font>
             <Font name="Segoe UI Bold" size="15.0" />
          </font>

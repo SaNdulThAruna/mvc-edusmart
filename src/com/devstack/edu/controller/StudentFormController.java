@@ -245,6 +245,7 @@ public class StudentFormController {
 
     public void btnNewStudentOnAction(ActionEvent actionEvent) {
         clearFields();
+        manageStatusVisibility(false);
         selectedStudentId = 0;
         btnSaveUpdate.setText("Save Student");
     }
