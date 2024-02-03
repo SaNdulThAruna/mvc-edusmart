@@ -33,7 +33,7 @@
             <Insets />
          </opaqueInsets>
       </Separator>
-      <Button layoutX="967.0" layoutY="20.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="193.0" style="-fx-background-color: #2980B9;" text="Make a backup" textFill="WHITE">
+      <Button layoutX="967.0" layoutY="20.0" mnemonicParsing="false" onAction="#makeBackupOnAction" prefHeight="42.0" prefWidth="193.0" style="-fx-background-color: #2980B9;" text="Make a backup" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
