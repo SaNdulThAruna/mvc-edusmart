@@ -20,26 +20,26 @@
         </Label>
         <Label layoutX="18.0" layoutY="730.0" text="Version : 1.0.0" />
         <Label layoutX="1009.0" layoutY="730.0" text="Developed By : Athena Extreme Solution" />
-        <TextField layoutX="14.0" layoutY="128.0" prefHeight="40.0" prefWidth="332.0" promptText="Intake Name" style="-fx-border-color: #D9D9D9;">
+        <TextField fx:id="txtIntakeName" layoutX="14.0" layoutY="128.0" prefHeight="40.0" prefWidth="332.0" promptText="Intake Name" style="-fx-border-color: #D9D9D9;">
             <font>
                 <Font size="17.0" />
             </font>
         </TextField>
-        <TextField layoutX="923.0" layoutY="293.0" prefHeight="40.0" prefWidth="349.0" promptText="Search here" style="-fx-border-color: #D9D9D9;">
+        <TextField layoutX="923.0" layoutY="293.0" onAction="#txtSearHere" prefHeight="40.0" prefWidth="349.0" promptText="Search here" style="-fx-border-color: #D9D9D9;">
             <font>
                 <Font size="17.0" />
             </font>
         </TextField>
-        <TableView layoutX="18.0" layoutY="345.0" prefHeight="375.0" prefWidth="1258.0" style="-fx-background-color: #FFFF;">
+        <TableView fx:id="tblIntake" layoutX="18.0" layoutY="345.0" prefHeight="375.0" prefWidth="1258.0" style="-fx-background-color: #FFFF;">
             <columns>
-                <TableColumn prefWidth="133.0" text="Intake id" />
-                <TableColumn minWidth="0.0" prefWidth="234.0" text="Program" />
-                <TableColumn minWidth="0.0" prefWidth="235.0" text="Intake Name" />
-                <TableColumn minWidth="0.0" prefWidth="242.0" text="Start Date" />
-                <TableColumn prefWidth="413.0" text="Operation" />
+                <TableColumn fx:id="colId" prefWidth="133.0" text="Intake id" />
+                <TableColumn fx:id="colProgram" minWidth="0.0" prefWidth="234.0" text="Program" />
+                <TableColumn fx:id="colIntakeName" minWidth="0.0" prefWidth="235.0" text="Intake Name" />
+                <TableColumn fx:id="colStartDate" minWidth="0.0" prefWidth="242.0" text="Start Date" />
+                <TableColumn fx:id="colOperation" prefWidth="413.0" text="Operation" />
             </columns>
         </TableView>
-        <Button layoutX="1092.0" layoutY="14.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="180.0" style="-fx-background-color: #16A085;" text="+ New Intake" textFill="WHITE">
+        <Button layoutX="1092.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnNewIntakeOnAction" prefHeight="46.0" prefWidth="180.0" style="-fx-background-color: #16A085;" text="+ New Intake" textFill="WHITE">
             <font>
                 <Font size="18.0" />
             </font>
@@ -49,13 +49,13 @@
                 <Font size="18.0" />
             </font>
         </Button>
-        <Button layoutX="1084.0" layoutY="201.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="188.0" style="-fx-background-color: #2980B9;" text="Save Intake" textFill="WHITE">
+        <Button fx:id="btnSaveIntake" layoutX="1084.0" layoutY="201.0" mnemonicParsing="false" onAction="#btnSaveIntakeOnAction" prefHeight="46.0" prefWidth="188.0" style="-fx-background-color: #2980B9;" text="Save Intake" textFill="WHITE">
             <font>
                 <Font size="18.0" />
             </font>
         </Button>
         <Separator layoutX="14.0" layoutY="265.0" prefHeight="0.0" prefWidth="1258.0" />
-      <DatePicker layoutX="714.0" layoutY="128.0" prefHeight="40.0" prefWidth="303.0" promptText="Start Date" />
-      <ComboBox layoutX="363.0" layoutY="128.0" prefHeight="40.0" prefWidth="332.0" promptText="Programs" />
+      <DatePicker fx:id="dpStartDate" layoutX="714.0" layoutY="128.0" prefHeight="40.0" prefWidth="303.0" promptText="Start Date" />
+      <ComboBox fx:id="cmbProgram" layoutX="363.0" layoutY="128.0" prefHeight="40.0" prefWidth="332.0" promptText="Programs" />
     </children>
 </AnchorPane>
