@@ -122,14 +122,14 @@ public class RegistrationFormController {
 
         double amount = getProgramAmount(Long.parseLong(cmbProgram.getValue().split("->")[0]));
 
-        if (amount == 0){
-            new Alert(Alert.AlertType.WARNING,"Program not found!").show();
+        if (amount == 0) {
+            new Alert(Alert.AlertType.WARNING, "Program not found!").show();
             return;
         }
 
         Long studentId = getSelectedStudent(txtStudent.getText());
-        if (studentId == 0){
-            new Alert(Alert.AlertType.WARNING,"Student not found!").show();
+        if (studentId == 0) {
+            new Alert(Alert.AlertType.WARNING, "Student not found!").show();
             return;
         }
 
@@ -139,20 +139,20 @@ public class RegistrationFormController {
         );
 
         boolean isSaved = saveRegistration(registration);
-        if (isSaved){
+        if (isSaved) {
             Long registerId = findRegistration(registration);
-            if (registerId == 0){
-                new Alert(Alert.AlertType.WARNING,"Registration is not found!").show();
+            if (registerId == 0) {
+                new Alert(Alert.AlertType.WARNING, "Registration is not found!").show();
                 return;
             }
             Payment payment = new Payment(
-                    0,LocalDate.now(),true,amount,registerId
+                    0, LocalDate.now(), true, amount, registerId
             );
             boolean isPaymentSaved = savePayment(payment);
-            if(isPaymentSaved){
-                new Alert(Alert.AlertType.INFORMATION,"Registration was success!").show();
-            }else{
-                new Alert(Alert.AlertType.INFORMATION,"Registration wasn't success!").show();
+            if (isPaymentSaved) {
+                new Alert(Alert.AlertType.INFORMATION, "Registration was success!").show();
+            } else {
+                new Alert(Alert.AlertType.INFORMATION, "Registration wasn't success!").show();
             }
         }
     }
@@ -169,14 +169,14 @@ public class RegistrationFormController {
             preparedStatement.setObject(3, payment.getAmount());
             preparedStatement.setObject(4, payment.getRegistrationId());
 
-            return preparedStatement.executeUpdate()>0;
+            return preparedStatement.executeUpdate() > 0;
 
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private Long findRegistration(Registration reg){
+    private Long findRegistration(Registration reg) {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             String query = "SELECT registraion.registration_id FROM registraion WHERE intake_intake_id=? AND student_student_id=?";
@@ -187,7 +187,7 @@ public class RegistrationFormController {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 return resultSet.getLong(1);
             }
 
@@ -197,7 +197,7 @@ public class RegistrationFormController {
         return 0L;
     }
 
-    private boolean saveRegistration(Registration reg){
+    private boolean saveRegistration(Registration reg) {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             String query = "INSERT INTO registraion(register_date, program_amount, intake_intake_id, student_student_id) " +
@@ -209,7 +209,7 @@ public class RegistrationFormController {
             preparedStatement.setObject(3, reg.getIntake());
             preparedStatement.setObject(4, reg.getStudent());
 
-            return preparedStatement.executeUpdate()>0;
+            return preparedStatement.executeUpdate() > 0;
 
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
