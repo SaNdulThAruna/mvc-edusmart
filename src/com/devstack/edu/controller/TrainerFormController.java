@@ -1,5 +1,6 @@
 package com.devstack.edu.controller;
 
+import com.devstack.edu.db.DBConnection;
 import com.devstack.edu.model.Student;
 import com.devstack.edu.model.Trainer;
 import com.devstack.edu.util.GlobalVar;
@@ -63,8 +64,7 @@ public class TrainerFormController {
         searchText = "%" + searchText + "%";
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/edusmart", "root", "SaNdul03282005");
+            Connection connection = DBConnection.getInstance().getConnection();
             String query = "SELECT * FROM trainer WHERE trainer.trainer_name LIKE ? OR trainer.trainer_email LIKE ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -111,8 +111,7 @@ public class TrainerFormController {
 
                     if (buttonType.get() == ButtonType.YES) {
                         try {
-                            Class.forName("com.mysql.cj.jdbc.Driver");
-                            Connection connection1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/edusmart", "root", "SaNdul03282005");
+                            Connection connection1 = DBConnection.getInstance().getConnection();
                             String query1 = "DELETE FROM trainer WHERE trainer_id=?";
 
                             PreparedStatement preparedStatement1 = connection1.prepareStatement(query1);
@@ -163,8 +162,7 @@ public class TrainerFormController {
         if (btnSaveUpdate.getText().equalsIgnoreCase("Save Trainer")) {
 
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/edusmart", "root", "SaNdul03282005");
+                Connection connection = DBConnection.getInstance().getConnection();
                 String query = "INSERT INTO trainer(trainer_name, trainer_email, nic, address, trainer_status) " + "VALUES (?,?,?,?,?)";
 
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -192,8 +190,7 @@ public class TrainerFormController {
                 return;
             }
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/edusmart", "root", "SaNdul03282005");
+                Connection connection = DBConnection.getInstance().getConnection();
                 String query = "UPDATE trainer set trainer_name=?,trainer_email=?,nic=?,address=? " +
                         "WHERE trainer_id=?";
 

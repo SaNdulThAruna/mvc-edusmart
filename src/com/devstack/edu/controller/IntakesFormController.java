@@ -1,5 +1,6 @@
 package com.devstack.edu.controller;
 
+import com.devstack.edu.db.DBConnection;
 import com.devstack.edu.model.Intake;
 import com.devstack.edu.view.tm.IntakeTm;
 import javafx.collections.FXCollections;
@@ -29,7 +30,7 @@ public class IntakesFormController {
     public DatePicker dpStartDate;
     public ComboBox<String> cmbProgram;
 
-    public void initialize(){
+    public void initialize() {
 
         colId.setCellValueFactory(new PropertyValueFactory<>("intakeId"));
         colIntakeName.setCellValueFactory(new PropertyValueFactory<>("intakeName"));
@@ -43,8 +44,7 @@ public class IntakesFormController {
 
     private void loadAllPrograms() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/edusmart", "root", "SaNdul03282005");
+            Connection connection = DBConnection.getInstance().getConnection();
             String query = "SELECT program_id,program_name FROM program";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -54,7 +54,7 @@ public class IntakesFormController {
             ObservableList<String> list = FXCollections.observableArrayList();
 
             while (resultSet.next()) {
-                list.add(resultSet.getString(1)+"->"+resultSet.getString(2));
+                list.add(resultSet.getString(1) + "->" + resultSet.getString(2));
             }
             cmbProgram.setItems(list);
 
@@ -70,7 +70,7 @@ public class IntakesFormController {
 
     private void setUI(String location) throws IOException {
         Stage stage = (Stage) intakeFormContext.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/"+location+".fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/" + location + ".fxml"))));
         stage.setTitle("EduSmart");
         stage.centerOnScreen();
     }
@@ -82,21 +82,19 @@ public class IntakesFormController {
     }
 
     public void btnSaveIntakeOnAction(ActionEvent actionEvent) {
-        Intake intake = new Intake(0, txtIntakeName.getText(),dpStartDate.getValue(),Long.parseLong(cmbProgram.getValue().split("->")[0]));
+        Intake intake = new Intake(0, txtIntakeName.getText(), dpStartDate.getValue(), Long.parseLong(cmbProgram.getValue().split("->")[0]));
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/edusmart", "root", "SaNdul03282005");
+            Connection connection = DBConnection.getInstance().getConnection();
             String query = "INSERT INTO intake(intake_name, start_date, program_program_id) VALUES (?,?,?)";
-
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setObject(1,intake.getIntakeName());
-            preparedStatement.setObject(2,intake.getStartDate());
-            preparedStatement.setObject(3,intake.getProgramId());
+            preparedStatement.setObject(1, intake.getIntakeName());
+            preparedStatement.setObject(2, intake.getStartDate());
+            preparedStatement.setObject(3, intake.getProgramId());
 
             boolean isSaved = preparedStatement.executeUpdate() > 0;
-            if (isSaved){
-                new Alert(Alert.AlertType.INFORMATION,"Intake Saved").show();
+            if (isSaved) {
+                new Alert(Alert.AlertType.INFORMATION, "Intake Saved").show();
                 clearFields();
                 loadAllIntakes();
             }
@@ -110,7 +108,7 @@ public class IntakesFormController {
     private void loadAllIntakes() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/edusmart", "root", "SaNdul03282005");
+            Connection connection = DBConnection.getInstance().getConnection();
             String query = "SELECT p.program_name,i.intake_id,i.intake_name,i.start_date FROM intake i INNER JOIN program p " +
                     "ON i.program_program_id = p.program_id";
 
@@ -118,7 +116,7 @@ public class IntakesFormController {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             ObservableList<IntakeTm> obList = FXCollections.observableArrayList();
-            while (resultSet.next()){
+            while (resultSet.next()) {
 
                 Button btn = new Button("Delete");
 

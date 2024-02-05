@@ -1,5 +1,6 @@
 package com.devstack.edu.controller;
 
+import com.devstack.edu.db.DBConnection;
 import com.devstack.edu.model.Student;
 import com.devstack.edu.util.GlobalVar;
 import com.devstack.edu.view.tm.StudentTm;
@@ -87,14 +88,13 @@ public class StudentFormController {
         if (btnSaveUpdate.getText().equalsIgnoreCase("Save Student")) {
 
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/edusmart", "root", "SaNdul03282005");
+                Connection connection = DBConnection.getInstance().getConnection();
                 String query = "INSERT INTO student(student_name, email, dob, address, status, user_email) " + "VALUES (?,?,?,?,?,?)";
 
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, student.getStudentName());
                 preparedStatement.setString(2, student.getEmail());
-                preparedStatement.setDate(3, java.sql.Date.valueOf(student.getDate()));
+                preparedStatement.setObject(3, java.sql.Date.valueOf(student.getDate()));
                 preparedStatement.setString(4, student.getAddress());
                 preparedStatement.setBoolean(5, true);
                 preparedStatement.setString(6, GlobalVar.userEmail);
@@ -117,8 +117,7 @@ public class StudentFormController {
                 return;
             }
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/edusmart", "root", "SaNdul03282005");
+                Connection connection = DBConnection.getInstance().getConnection();
                 String query = "UPDATE student set student_name=?,email=?,dob=?,address=?,status=? " +
                         "WHERE student_id=?";
 

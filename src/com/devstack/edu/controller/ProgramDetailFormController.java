@@ -1,5 +1,6 @@
 package com.devstack.edu.controller;
 
+import com.devstack.edu.db.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
@@ -12,8 +13,7 @@ public class ProgramDetailFormController {
     public void setId(Long id){
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/edusmart", "root", "SaNdul03282005");
+            Connection connection = DBConnection.getInstance().getConnection();
             String query = "SELECT * FROM program_content WHERE program_program_id=?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
