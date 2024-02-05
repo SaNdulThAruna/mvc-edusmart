@@ -1,5 +1,6 @@
 package com.devstack.edu.controller;
 
+import com.devstack.edu.db.DBConnection;
 import com.devstack.edu.model.Program;
 import com.devstack.edu.model.ProgramContent;
 import com.devstack.edu.util.GlobalVar;
@@ -35,11 +36,10 @@ public class ProgramsFormController {
     public TextField txtProgram;
     public ListView<String> lstContent;
     public TextField txtSearch;
+    ObservableList<String> contents = FXCollections.observableArrayList();
     private String searchText = "";
 
-    ObservableList<String> contents = FXCollections.observableArrayList();
-
-    public void initialize(){
+    public void initialize() {
 
         colTrainer.setCellValueFactory(new PropertyValueFactory<>("trainerId"));
         colProgram.setCellValueFactory(new PropertyValueFactory<>("program"));
@@ -60,10 +60,8 @@ public class ProgramsFormController {
 
     private void loadAllTrainers() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/edusmart", "root", "SaNdul03282005");
+            Connection connection = DBConnection.getInstance().getConnection();
             String query = "SELECT trainer_id,trainer_name FROM trainer";
-
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -71,7 +69,7 @@ public class ProgramsFormController {
             ObservableList<String> list = FXCollections.observableArrayList();
 
             while (resultSet.next()) {
-                list.add(resultSet.getString(1)+"->"+resultSet.getString(2));
+                list.add(resultSet.getString(1) + "->" + resultSet.getString(2));
             }
             cmbTrainer.setItems(list);
 
@@ -87,7 +85,7 @@ public class ProgramsFormController {
 
     private void setUI(String location) throws IOException {
         Stage stage = (Stage) programFormContext.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/"+location+".fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/" + location + ".fxml"))));
         stage.setTitle("EduSmart");
         stage.centerOnScreen();
     }
@@ -104,33 +102,32 @@ public class ProgramsFormController {
         );
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/edusmart", "root", "SaNdul03282005");
+            Connection connection = DBConnection.getInstance().getConnection();
             String query = "Insert Into program(hours, program_name, amount, user_email, trainer_trainer_id) VALUES (?,?,?,?,?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setObject(1,program.getHours());
-            preparedStatement.setObject(2,program.getProgramName());
-            preparedStatement.setObject(3,program.getAmount());
-            preparedStatement.setObject(4,program.getUserEmail());
-            preparedStatement.setObject(5,program.getTrainerId());
+            preparedStatement.setObject(1, program.getHours());
+            preparedStatement.setObject(2, program.getProgramName());
+            preparedStatement.setObject(3, program.getAmount());
+            preparedStatement.setObject(4, program.getUserEmail());
+            preparedStatement.setObject(5, program.getTrainerId());
 
-            boolean isSaved = preparedStatement.executeUpdate()>0;
+            boolean isSaved = preparedStatement.executeUpdate() > 0;
 
             //--------------------------------------------------------
             PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT program.program_id FROM program ORDER BY program_id DESC LIMIT 1");
             ResultSet resultSet = preparedStatement1.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 long pid = resultSet.getLong(1);
-                if(isSaved){
-                    for(String s: contents){
+                if (isSaved) {
+                    for (String s : contents) {
 
                         PreparedStatement preparedStatement2 = connection.prepareStatement("INSERT INTO program_content(header, program_program_id) VALUES (?,?)");
-                        preparedStatement2.setObject(1,s);
-                        preparedStatement2.setObject(2,pid);
+                        preparedStatement2.setObject(1, s);
+                        preparedStatement2.setObject(2, pid);
                         preparedStatement2.executeUpdate();
                     }
-                    new Alert(Alert.AlertType.INFORMATION,"Saved").show();
+                    new Alert(Alert.AlertType.INFORMATION, "Saved").show();
                     loadAllPrograms(searchText);
                 }
             }
@@ -142,10 +139,9 @@ public class ProgramsFormController {
     }
 
     private void loadAllPrograms(String searchText) {
-        searchText="%"+searchText+"%";
+        searchText = "%" + searchText + "%";
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/edusmart", "root", "SaNdul03282005");
+            Connection connection = DBConnection.getInstance().getConnection();
             String query = "SELECT * FROM program WHERE program_name LIKE ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -161,7 +157,7 @@ public class ProgramsFormController {
                 Button showMoreButton = new Button("Show");
 
                 ButtonBar bar = new ButtonBar();
-                bar.getButtons().addAll(daleteButton,showMoreButton);
+                bar.getButtons().addAll(daleteButton, showMoreButton);
 
                 ProgramTm tm = new ProgramTm(
                         resultSet.getLong("program_id"),
@@ -173,7 +169,7 @@ public class ProgramsFormController {
                 );
                 tms.add(tm);
 
-                showMoreButton.setOnAction(e->{
+                showMoreButton.setOnAction(e -> {
                     try {
                         /*Parent parent = FXMLLoader.load(getClass().getResource("../view/ProgramDetailForm.fxml"));
                         Scene scene = new Scene(parent);
@@ -204,8 +200,7 @@ public class ProgramsFormController {
 
                     if (buttonType.get() == ButtonType.YES) {
                         try {
-                            Class.forName("com.mysql.cj.jdbc.Driver");
-                            Connection connection1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/edusmart", "root", "SaNdul03282005");
+                            Connection connection1 = DBConnection.getInstance().getConnection();
                             String query1 = "DELETE FROM program WHERE program_id=?";
 
                             PreparedStatement preparedStatement1 = connection1.prepareStatement(query1);

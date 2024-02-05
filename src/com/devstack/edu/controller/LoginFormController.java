@@ -1,5 +1,6 @@
 package com.devstack.edu.controller;
 
+import com.devstack.edu.db.DBConnection;
 import com.devstack.edu.util.GlobalVar;
 import com.devstack.edu.util.PasswordManager;
 import javafx.event.ActionEvent;
@@ -20,7 +21,7 @@ public class LoginFormController {
     public TextField txtEmail;
     public PasswordField txtPassword;
 
-    public void initialize(){
+    public void initialize() {
         txtEmail.setText("sandul@gmail.com");
         txtPassword.setText("1234");
     }
@@ -28,11 +29,8 @@ public class LoginFormController {
     public void signInOnAction(ActionEvent actionEvent) throws IOException {
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/edusmart", "root", "SaNdul03282005");
-            //language=MySQL
+            Connection connection = DBConnection.getInstance().getConnection();
             String query = "SELECT email,password FROM user WHERE email=?";
-
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, txtEmail.getText());
 
@@ -40,15 +38,15 @@ public class LoginFormController {
 
             if (resultSet.next()) {
 
-                if(PasswordManager.checkPw(txtPassword.getText(),
-                        resultSet.getString(2))){
+                if (PasswordManager.checkPw(txtPassword.getText(),
+                        resultSet.getString(2))) {
                     GlobalVar.userEmail = resultSet.getString(1);
                     setUI("DashboardForm");
-                }else{
+                } else {
                     new Alert(Alert.AlertType.WARNING, "Password is Wrong!").show();
                 }
 
-            }else{
+            } else {
                 new Alert(Alert.AlertType.WARNING, "User not found!").show();
             }
 
