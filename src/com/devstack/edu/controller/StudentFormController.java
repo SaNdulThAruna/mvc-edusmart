@@ -1,7 +1,10 @@
 package com.devstack.edu.controller;
 
+import com.devstack.edu.dao.DaoFactory;
+import com.devstack.edu.dao.custom.StudentDao;
+import com.devstack.edu.dao.custom.impl.StudentDaoImpl;
 import com.devstack.edu.db.DBConnection;
-import com.devstack.edu.model.Student;
+import com.devstack.edu.entity.Student;
 import com.devstack.edu.util.GlobalVar;
 import com.devstack.edu.view.tm.StudentTm;
 import javafx.collections.FXCollections;
@@ -42,6 +45,8 @@ public class StudentFormController {
 
     private String searchText = "";
     private int selectedStudentId = 0;
+
+    private StudentDao studentDao = DaoFactory.getDao(DaoFactory.DaoType.STUDENT);
 
     public void initialize() {
 
@@ -84,22 +89,12 @@ public class StudentFormController {
     }
 
     public void btnSaveUpdateOnAction(ActionEvent actionEvent) {
-        Student student = new Student(0, txtStudentName.getText(), txtEmail.getText(), dob.getValue(), txtAddress.getText(), true);
+        Student student = new Student(0, txtStudentName.getText(), txtEmail.getText(), dob.getValue(), txtAddress.getText(), true,GlobalVar.userEmail);
         if (btnSaveUpdate.getText().equalsIgnoreCase("Save Student")) {
 
             try {
-                Connection connection = DBConnection.getInstance().getConnection();
-                String query = "INSERT INTO student(student_name, email, dob, address, status, user_email) " + "VALUES (?,?,?,?,?,?)";
 
-                PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1, student.getStudentName());
-                preparedStatement.setString(2, student.getEmail());
-                preparedStatement.setObject(3, java.sql.Date.valueOf(student.getDate()));
-                preparedStatement.setString(4, student.getAddress());
-                preparedStatement.setBoolean(5, true);
-                preparedStatement.setString(6, GlobalVar.userEmail);
-
-                if (preparedStatement.executeUpdate() > 0) {
+                if (studentDao.save(student)) {
                     new Alert(Alert.AlertType.INFORMATION, "Student was Saved!").show();
                     clearFields();
                     loadStudent(searchText);
@@ -117,19 +112,8 @@ public class StudentFormController {
                 return;
             }
             try {
-                Connection connection = DBConnection.getInstance().getConnection();
-                String query = "UPDATE student set student_name=?,email=?,dob=?,address=?,status=? " +
-                        "WHERE student_id=?";
 
-                PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1, student.getStudentName());
-                preparedStatement.setString(2, student.getEmail());
-                preparedStatement.setDate(3, java.sql.Date.valueOf(student.getDate()));
-                preparedStatement.setString(4, student.getAddress());
-                preparedStatement.setBoolean(5, rBtnActive.isSelected());
-                preparedStatement.setInt(6, selectedStudentId);
-
-                if (preparedStatement.executeUpdate() > 0) {
+                if (studentDao.updateStudent(student,rBtnActive.isSelected(),selectedStudentId)) {
                     new Alert(Alert.AlertType.INFORMATION, "Student was Updated!").show();
                     clearFields();
                     loadStudent(searchText);
@@ -157,20 +141,10 @@ public class StudentFormController {
         searchText = "%" + searchText + "%";
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/edusmart", "root", "SaNdul03282005");
-            String query = "SELECT * FROM student WHERE student_name LIKE ? OR email LIKE ?";
-
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, searchText);
-            preparedStatement.setString(2, searchText);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
 
             ObservableList<StudentTm> tms = FXCollections.observableArrayList();
 
-            while (resultSet.next()) {
-
+            for (Student student:studentDao.findAllStudents(searchText)){
                 Button daleteButton = new Button("Delete");
                 Button updateButton = new Button("Update");
 
@@ -178,12 +152,12 @@ public class StudentFormController {
                 bar.getButtons().addAll(daleteButton, updateButton);
 
                 StudentTm tm = new StudentTm(
-                        resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getBoolean(6)?"Active":"InActive",
+                        student.getStudentId(),
+                        student.getStudentName(),
+                        student.getEmail(),
+                        student.getDate().toString(),
+                        student.getAddress(),
+                        student.isStatus()?"Active":"InActive",
                         bar
                 );
                 tms.add(tm);
@@ -213,14 +187,8 @@ public class StudentFormController {
 
                     if (buttonType.get() == ButtonType.YES) {
                         try {
-                            Class.forName("com.mysql.cj.jdbc.Driver");
-                            Connection connection1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/edusmart", "root", "SaNdul03282005");
-                            String query1 = "DELETE FROM student WHERE student_id=?";
 
-                            PreparedStatement preparedStatement1 = connection1.prepareStatement(query1);
-                            preparedStatement1.setInt(1, tm.getId());
-
-                            if (preparedStatement1.executeUpdate() > 0) {
+                            if (studentDao.delete(tm.getId())) {
                                 new Alert(Alert.AlertType.INFORMATION, "Student was Deleted!").show();
                                 loadStudent("");
                             } else {
@@ -231,7 +199,6 @@ public class StudentFormController {
                         }
                     }
                 });
-
             }
 
             tblStudent.setItems(tms);
