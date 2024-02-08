@@ -1,9 +1,11 @@
 package com.devstack.edu.controller;
 
+import com.devstack.edu.dao.DaoFactory;
+import com.devstack.edu.dao.SuperDao;
+import com.devstack.edu.dao.custom.TrainerDao;
+import com.devstack.edu.dao.custom.impl.TrainerDaoImpl;
 import com.devstack.edu.db.DBConnection;
-import com.devstack.edu.model.Student;
-import com.devstack.edu.model.Trainer;
-import com.devstack.edu.util.GlobalVar;
+import com.devstack.edu.entity.Trainer;
 import com.devstack.edu.view.tm.TrainerTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,7 +41,9 @@ public class TrainerFormController {
     private String searchText = "";
     private long selectedTrainerId = 0;
 
-    public void initialize(){
+    private TrainerDao trainerDao = DaoFactory.getDao(DaoFactory.DaoType.TRAINER);
+
+    public void initialize() {
 
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -64,19 +68,10 @@ public class TrainerFormController {
         searchText = "%" + searchText + "%";
 
         try {
-            Connection connection = DBConnection.getInstance().getConnection();
-            String query = "SELECT * FROM trainer WHERE trainer.trainer_name LIKE ? OR trainer.trainer_email LIKE ?";
-
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, searchText);
-            preparedStatement.setString(2, searchText);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
 
             ObservableList<TrainerTm> tms = FXCollections.observableArrayList();
 
-            while (resultSet.next()) {
-
+            for (Trainer trainer : trainerDao.findAllTrainers(searchText)) {
                 Button daleteButton = new Button("Delete");
                 Button updateButton = new Button("Update");
 
@@ -84,14 +79,15 @@ public class TrainerFormController {
                 bar.getButtons().addAll(daleteButton, updateButton);
 
                 TrainerTm tm = new TrainerTm(
-                        resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getBoolean(6)?"Active":"InActive",
+                        trainer.getTrainerId(),
+                        trainer.getTrainerName(),
+                        trainer.getEmail(),
+                        trainer.getNic(),
+                        trainer.getAddress(),
+                        trainer.isStatus() ? "Active" : "InActive",
                         bar
                 );
+
                 tms.add(tm);
 
                 updateButton.setOnAction(e -> {
@@ -131,6 +127,7 @@ public class TrainerFormController {
 
             }
 
+
             tblTrainer.setItems(tms);
 
         } catch (ClassNotFoundException | SQLException e) {
@@ -162,17 +159,8 @@ public class TrainerFormController {
         if (btnSaveUpdate.getText().equalsIgnoreCase("Save Trainer")) {
 
             try {
-                Connection connection = DBConnection.getInstance().getConnection();
-                String query = "INSERT INTO trainer(trainer_name, trainer_email, nic, address, trainer_status) " + "VALUES (?,?,?,?,?)";
 
-                PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1, trainer.getTrainerName());
-                preparedStatement.setString(2, trainer.getEmail());
-                preparedStatement.setString(3, trainer.getNic());
-                preparedStatement.setString(4, trainer.getAddress());
-                preparedStatement.setBoolean(5, trainer.isStatus());
-
-                if (preparedStatement.executeUpdate() > 0) {
+                if (trainerDao.save(trainer)) {
                     new Alert(Alert.AlertType.INFORMATION, "Trainer was Saved!").show();
                     clearFields();
                     loadTrainers(searchText);
@@ -190,18 +178,8 @@ public class TrainerFormController {
                 return;
             }
             try {
-                Connection connection = DBConnection.getInstance().getConnection();
-                String query = "UPDATE trainer set trainer_name=?,trainer_email=?,nic=?,address=? " +
-                        "WHERE trainer_id=?";
 
-                PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1, trainer.getTrainerName());
-                preparedStatement.setString(2, trainer.getEmail());
-                preparedStatement.setString(3, trainer.getNic());
-                preparedStatement.setString(4, trainer.getAddress());
-                preparedStatement.setLong(5, selectedTrainerId);
-
-                if (preparedStatement.executeUpdate() > 0) {
+                if (trainerDao.updateTrainer(trainer, selectedTrainerId)) {
                     new Alert(Alert.AlertType.INFORMATION, "Trainer was Updated!").show();
                     clearFields();
                     loadTrainers(searchText);
