@@ -54,7 +54,7 @@
             <TableColumn fx:id="colOption" prefWidth="216.0" text="Operation" />
         </columns>
       </TableView>
-      <Button layoutX="1092.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnNewStudentOnAction" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #16A085;" text="+ New Student" textFill="WHITE">
+      <Button fx:id="btnNewStudent" layoutX="1092.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnNewStudentOnAction" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #16A085;" text="+ New Student" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>

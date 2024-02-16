@@ -47,36 +47,38 @@ public class DashboardFormController {
     }
 
     public void studentOnClickAction(MouseEvent mouseEvent) throws IOException {
-        setUI("StudentForm");
+        setUI("StudentForm","student");
     }
 
     public void programOnClickAction(MouseEvent mouseEvent) throws IOException {
-        setUI("ProgramsForm");
+        setUI("ProgramsForm","programs");
     }
 
     public void reportOnClickAction(MouseEvent mouseEvent) throws IOException {
-        setUI("ReportForm");
+        setUI("ReportForm","report");
     }
 
     public void registrationOnClickAction(MouseEvent mouseEvent) throws IOException {
-        setUI("RegistrationForm");
+        setUI("RegistrationForm","registration");
     }
 
     public void incomeOnClickAction(MouseEvent mouseEvent) throws IOException {
-        setUI("IncomeForm");
+        setUI("IncomeForm","income");
     }
 
     public void intakeOnClickAction(MouseEvent mouseEvent) throws IOException {
-        setUI("IntakesForm");
+        setUI("IntakesForm","intake");
     }
 
     public void trainerOnClickAction(MouseEvent mouseEvent) throws IOException {
-        setUI("TrainerForm");
+        setUI("TrainerForm","trainer");
     }
 
-    private void setUI(String location) throws IOException {
+    private void setUI(String location,String styleSheet) throws IOException {
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("../view/"+location+".fxml")));
+        scene.getStylesheets().add(getClass().getResource("../view/styles/"+styleSheet+".css").toExternalForm());
         Stage stage = (Stage) dashboardFormContext.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/"+location+".fxml"))));
+        stage.setScene(scene);
         stage.setTitle("EduSmart");
         stage.centerOnScreen();
     }

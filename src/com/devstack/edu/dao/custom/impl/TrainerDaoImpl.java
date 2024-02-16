@@ -2,22 +2,19 @@ package com.devstack.edu.dao.custom.impl;
 
 import com.devstack.edu.dao.CrudUtil;
 import com.devstack.edu.dao.custom.TrainerDao;
-import com.devstack.edu.db.DBConnection;
 import com.devstack.edu.entity.Trainer;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrainerDaoImpl implements TrainerDao{
+public class TrainerDaoImpl implements TrainerDao {
     @Override
     public boolean updateTrainer(Trainer trainer, long selectedTrainerId) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("UPDATE trainer set trainer_name=?,trainer_email=?,nic=?,address=? " +
-                "WHERE trainer_id=?",trainer.getTrainerName(),trainer.getEmail(),trainer.getNic(),
-                trainer.getAddress(),selectedTrainerId
+                        "WHERE trainer_id=?", trainer.getTrainerName(), trainer.getEmail(), trainer.getNic(),
+                trainer.getAddress(), selectedTrainerId
         );
     }
 
@@ -38,10 +35,21 @@ public class TrainerDaoImpl implements TrainerDao{
     }
 
     @Override
+    public List<String> loadAllTrainers() throws SQLException, ClassNotFoundException {
+
+        ResultSet rs = CrudUtil.execute("SELECT * FROM trainer");
+        ArrayList<String> trainers = new ArrayList<>();
+        while (rs.next()) {
+            trainers.add(rs.getInt(1)+"->"+rs.getString(2));
+        }
+         return trainers;
+    }
+
+    @Override
     public boolean save(Trainer trainer) throws SQLException, ClassNotFoundException {
 
         return CrudUtil.execute("INSERT INTO trainer(trainer_name, trainer_email, nic, address, trainer_status) " + "VALUES (?,?,?,?,?)",
-                trainer.getTrainerName(),trainer.getEmail(),trainer.getEmail(),trainer.getNic(),trainer.getAddress(),trainer.isStatus()
+                trainer.getTrainerName(), trainer.getEmail(), trainer.getEmail(), trainer.getNic(), trainer.getAddress(), trainer.isStatus()
         );
     }
 

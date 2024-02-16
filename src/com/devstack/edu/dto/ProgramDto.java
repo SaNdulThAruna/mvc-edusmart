@@ -1,8 +1,8 @@
-package com.devstack.edu.model;
+package com.devstack.edu.dto;
 
 import java.util.List;
 
-public class Program {
+public class ProgramDto {
     private long programId;
     private int hours;
     private String programName;
@@ -11,10 +11,10 @@ public class Program {
     private long trainerId;
     private List<String> content;
 
-    public Program() {
+    public ProgramDto() {
     }
 
-    public Program(long programId, int hours, String programName, double amount, String userEmail, long trainerId, List<String> content) {
+    public ProgramDto(long programId, int hours, String programName, double amount, String userEmail, long trainerId, List<String> content) {
         this.programId = programId;
         this.hours = hours;
         this.programName = programName;

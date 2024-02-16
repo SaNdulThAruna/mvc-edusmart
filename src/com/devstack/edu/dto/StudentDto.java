@@ -1,9 +1,8 @@
-package com.devstack.edu.model;
+package com.devstack.edu.dto;
 
 import java.time.LocalDate;
-import java.util.Date;
 
-public class Student {
+public class StudentDto {
     private int studentId;
     private String studentName;
     private String email;
@@ -11,10 +10,10 @@ public class Student {
     private String address;
     private boolean status;
 
-    public Student() {
+    public StudentDto() {
     }
 
-    public Student(int studentId, String studentName, String email, LocalDate date, String address, boolean status) {
+    public StudentDto(int studentId, String studentName, String email, LocalDate date, String address, boolean status) {
         this.studentId = studentId;
         this.studentName = studentName;
         this.email = email;
