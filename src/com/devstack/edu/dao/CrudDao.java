@@ -12,7 +12,7 @@ public interface CrudDao<T, ID> extends SuperDao{
 
     public T find(ID id);
 
-    public List<T> findAll();
+    public List<T> findAll() throws SQLException, ClassNotFoundException;
 
 }
 

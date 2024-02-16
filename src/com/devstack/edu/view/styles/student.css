@@ -1,0 +1,43 @@
+.button-style{
+    -fx-background-color: #2bd92b !important;
+    -fx-text-fill: white!important;
+}
+
+.table-view{
+    -fx-background-color: #f0f0f0 !important;
+}
+.table-view .column-header-background{
+    -fx-background-color: #04a104;
+    -fx-text-fill: white;
+}
+.table-view .column-header{
+    -fx-padding: 5 10;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+.table-row-cell{
+    -fx-background-color: rgb(26,188,156);
+
+}
+.table-row-cell:odd{
+    -fx-background-color: rgb(52,152,219);
+}
+.table-row-cell:selected{
+    -fx-background-color: rgb(52,73,94);
+}
+.table-row-cell:selected .table-cell{
+    -fx-text-fill: #FFFFFF;
+}
+.delete-button{
+    -fx-background-color: rgb(231,76,60);
+    -fx-text-fill: #FFFFFF;
+}
+.update-button{
+    -fx-background-color: rgb(155,89,182);
+    -fx-text-fill: #FFFFFF;
+}
+.error{
+    -fx-border-color: red!important;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+}

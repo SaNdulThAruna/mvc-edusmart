@@ -1,11 +1,15 @@
 package com.devstack.edu.controller;
 
+import com.devstack.edu.bo.BoFactory;
+import com.devstack.edu.bo.custom.StudentBo;
 import com.devstack.edu.dao.DaoFactory;
 import com.devstack.edu.dao.custom.StudentDao;
 import com.devstack.edu.dao.custom.impl.StudentDaoImpl;
 import com.devstack.edu.db.DBConnection;
+import com.devstack.edu.dto.StudentDto;
 import com.devstack.edu.entity.Student;
 import com.devstack.edu.util.GlobalVar;
+import com.devstack.edu.validators.SimpleTextValidator;
 import com.devstack.edu.view.tm.StudentTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,13 +46,16 @@ public class StudentFormController {
     public ToggleGroup status;
     public Label lblStatus;
     public RadioButton rBtnInactive;
+    public Button btnNewStudent;
 
     private String searchText = "";
     private int selectedStudentId = 0;
 
-    private StudentDao studentDao = DaoFactory.getDao(DaoFactory.DaoType.STUDENT);
+    private StudentBo studentBo = BoFactory.getBo(BoFactory.BoType.STUDENT);
 
     public void initialize() {
+
+        btnNewStudent.getStyleClass().add("button-style");
 
         manageStatusVisibility(false);
 
@@ -89,12 +96,31 @@ public class StudentFormController {
     }
 
     public void btnSaveUpdateOnAction(ActionEvent actionEvent) {
-        Student student = new Student(0, txtStudentName.getText(), txtEmail.getText(), dob.getValue(), txtAddress.getText(), true,GlobalVar.userEmail);
+
+        txtStudentName.getStyleClass().removeAll("error");
+
+        if (!SimpleTextValidator.validateName(txtStudentName.getText())){
+            txtStudentName.getStyleClass().add("error");
+            new Alert(Alert.AlertType.ERROR, "Wrong Student name").show();
+            return;
+        }
+        if (!SimpleTextValidator.validateDob(dob.getValue().toString())){
+            new Alert(Alert.AlertType.ERROR, "Wrong DOB").show();
+            return;
+        }
+        if (!SimpleTextValidator.validateAddress(txtAddress.getText())){
+            new Alert(Alert.AlertType.ERROR, "Wrong Address").show();
+            return;
+        }
+
+        StudentDto student = new StudentDto(0, txtStudentName.getText(), txtEmail.getText(), dob.getValue(),
+                txtAddress.getText(), true
+        );
         if (btnSaveUpdate.getText().equalsIgnoreCase("Save Student")) {
 
             try {
 
-                if (studentDao.save(student)) {
+                if (studentBo.saveStudent(student)) {
                     new Alert(Alert.AlertType.INFORMATION, "Student was Saved!").show();
                     clearFields();
                     loadStudent(searchText);
@@ -113,7 +139,7 @@ public class StudentFormController {
             }
             try {
 
-                if (studentDao.updateStudent(student,rBtnActive.isSelected(),selectedStudentId)) {
+                if (studentBo.updateStudent(student,rBtnActive.isSelected(),selectedStudentId)) {
                     new Alert(Alert.AlertType.INFORMATION, "Student was Updated!").show();
                     clearFields();
                     loadStudent(searchText);
@@ -144,12 +170,15 @@ public class StudentFormController {
 
             ObservableList<StudentTm> tms = FXCollections.observableArrayList();
 
-            for (Student student:studentDao.findAllStudents(searchText)){
-                Button daleteButton = new Button("Delete");
+            for (StudentDto student:studentBo.findAllStudents(searchText)){
+                Button deleteButton = new Button("Delete");
                 Button updateButton = new Button("Update");
 
+                deleteButton.getStyleClass().add("delete-button");
+                updateButton.getStyleClass().add("update-button");
+
                 ButtonBar bar = new ButtonBar();
-                bar.getButtons().addAll(daleteButton, updateButton);
+                bar.getButtons().addAll(deleteButton, updateButton);
 
                 StudentTm tm = new StudentTm(
                         student.getStudentId(),
@@ -179,7 +208,7 @@ public class StudentFormController {
                     btnSaveUpdate.setText("Update Student");
                 });
 
-                daleteButton.setOnAction(e -> {
+                deleteButton.setOnAction(e -> {
 
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are your sure?", ButtonType.YES, ButtonType.NO);
 
@@ -188,7 +217,7 @@ public class StudentFormController {
                     if (buttonType.get() == ButtonType.YES) {
                         try {
 
-                            if (studentDao.delete(tm.getId())) {
+                            if (studentBo.deleteStudent(tm.getId())) {
                                 new Alert(Alert.AlertType.INFORMATION, "Student was Deleted!").show();
                                 loadStudent("");
                             } else {

@@ -1,20 +1,21 @@
 package com.devstack.edu.controller;
 
+import com.devstack.edu.bo.BoFactory;
+import com.devstack.edu.bo.custom.TrainerBo;
 import com.devstack.edu.db.DBConnection;
-import com.devstack.edu.model.Program;
-import com.devstack.edu.model.ProgramContent;
 import com.devstack.edu.util.GlobalVar;
 import com.devstack.edu.view.tm.ProgramTm;
-import com.devstack.edu.view.tm.TrainerTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -34,10 +35,12 @@ public class ProgramsFormController {
     public TextField txtAmount;
     public ComboBox<String> cmbTrainer;
     public TextField txtProgram;
-    public ListView<String> lstContent;
+    public ListView lstContent;
     public TextField txtSearch;
-    ObservableList<String> contents = FXCollections.observableArrayList();
+    ObservableList<HBox> contents = FXCollections.observableArrayList();
     private String searchText = "";
+
+    private TrainerBo trainerBo = BoFactory.getBo(BoFactory.BoType.TRAINER);
 
     public void initialize() {
 
@@ -60,17 +63,7 @@ public class ProgramsFormController {
 
     private void loadAllTrainers() {
         try {
-            Connection connection = DBConnection.getInstance().getConnection();
-            String query = "SELECT trainer_id,trainer_name FROM trainer";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            ObservableList<String> list = FXCollections.observableArrayList();
-
-            while (resultSet.next()) {
-                list.add(resultSet.getString(1) + "->" + resultSet.getString(2));
-            }
+            ObservableList<String> list = FXCollections.observableArrayList(trainerBo.loadAllTrainers());
             cmbTrainer.setItems(list);
 
         } catch (ClassNotFoundException | SQLException e) {
@@ -91,26 +84,26 @@ public class ProgramsFormController {
     }
 
     public void btnSaveProgramOnAction(ActionEvent actionEvent) {
-        Program program = new Program(
-                0L,
-                Integer.parseInt(txtHours.getText()),
-                txtProgram.getText(),
-                Double.parseDouble(txtAmount.getText()),
-                GlobalVar.userEmail,
-                Long.parseLong(cmbTrainer.getValue().split("->")[0]),
-                contents
-        );
+//        Program program = new Program(
+//                0L,
+//                Integer.parseInt(txtHours.getText()),
+//                txtProgram.getText(),
+//                Double.parseDouble(txtAmount.getText()),
+//                GlobalVar.userEmail,
+//                Long.parseLong(cmbTrainer.getValue().split("->")[0]),
+//                contents
+//        );
 
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             String query = "Insert Into program(hours, program_name, amount, user_email, trainer_trainer_id) VALUES (?,?,?,?,?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setObject(1, program.getHours());
-            preparedStatement.setObject(2, program.getProgramName());
-            preparedStatement.setObject(3, program.getAmount());
-            preparedStatement.setObject(4, program.getUserEmail());
-            preparedStatement.setObject(5, program.getTrainerId());
+//            preparedStatement.setObject(1, program.getHours());
+//            preparedStatement.setObject(2, program.getProgramName());
+//            preparedStatement.setObject(3, program.getAmount());
+//            preparedStatement.setObject(4, program.getUserEmail());
+//            preparedStatement.setObject(5, program.getTrainerId());
 
             boolean isSaved = preparedStatement.executeUpdate() > 0;
 
@@ -120,12 +113,18 @@ public class ProgramsFormController {
             if (resultSet.next()) {
                 long pid = resultSet.getLong(1);
                 if (isSaved) {
-                    for (String s : contents) {
 
-                        PreparedStatement preparedStatement2 = connection.prepareStatement("INSERT INTO program_content(header, program_program_id) VALUES (?,?)");
-                        preparedStatement2.setObject(1, s);
-                        preparedStatement2.setObject(2, pid);
-                        preparedStatement2.executeUpdate();
+                    for (HBox hBox:contents){
+                        for (Node node:hBox.getChildren()){
+                            if (node instanceof Label){
+                                Label l = (Label) node;
+                                String text = l.getText();
+                                PreparedStatement preparedStatement2 = connection.prepareStatement("INSERT INTO program_content(header, program_program_id) VALUES (?,?)");
+                                preparedStatement2.setObject(1, text);
+                                preparedStatement2.setObject(2, pid);
+                                preparedStatement2.executeUpdate();
+                            }
+                        }
                     }
                     new Alert(Alert.AlertType.INFORMATION, "Saved").show();
                     loadAllPrograms(searchText);
@@ -230,7 +229,10 @@ public class ProgramsFormController {
 
     public void txtContentOnAction(ActionEvent actionEvent) {
 //        contents.clear();
-        contents.add(txtContent.getText());
+        HBox hBox = new HBox();
+        Button btn = new Button("Delete");
+        hBox.getChildren().addAll(btn,new Label(txtContent.getText()));
+        contents.add(hBox);
         txtContent.clear();
         lstContent.setItems(contents);
     }
